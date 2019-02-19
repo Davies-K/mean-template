@@ -4,7 +4,8 @@
   "description": "Backend with mongodb and nodejs for mean stack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/Vasanthkesavan/mean-template/issues"
   },
-  "homepage": "https://github.com/Vasanthkesavan/mean-template#readme"
+  "homepage": "https://github.com/Vasanthkesavan/mean-template#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pg": "^7.8.0",
+    "socket.io": "^2.2.0"
+  }
 }
