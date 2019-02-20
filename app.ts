@@ -1,5 +1,11 @@
+import dotenv from "dotenv";
 import express = require("express");
 import mongoose = require("mongoose");
+
+// body parser: https://github.com/types/npm-body-parser/blob/master/test/express.ts
+
+// initialize configuration
+dotenv.config();
 
 const app: express.Application = express();
 
