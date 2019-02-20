@@ -13,16 +13,16 @@ app.get('/', function (req, res) {
     res.send('Hello World!');
 });
 
-// Everything to start the application
+// Everything to start the applications
 async function connect() {
     try {
         await mongoose.connect("mongodb://localhost/test", {useNewUrlParser: true});
-        app.listen(3000, function () {
-            console.log('Example app listening on port 3000!');
-        });
     } catch(e) {
-        console.log(e);
+        console.log("Mongoose connection error ", e);
     }
+    app.listen(3000, function () {
+        console.log('Example app listening on port 3000!');
+    });
 };
 
 connect();
