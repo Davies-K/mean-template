@@ -6,11 +6,15 @@ import {fas} from "@fortawesome/free-solid-svg-icons";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {HomeComponent} from "./home.component";
+import {NotFoundComponent} from "./not-found.component";
 
 library.add(fas);
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
