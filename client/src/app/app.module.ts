@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HomeComponent} from "./home.component";
 import {NotFoundComponent} from "./not-found.component";
+import {AuthModule} from "./auth/auth.module";
 
 library.add(fas);
 @NgModule({
@@ -19,7 +20,8 @@ library.add(fas);
   imports: [
     BrowserModule,
     FontAwesomeModule,
-    AppRoutingModule
+    AuthModule,
+    AppRoutingModule // make sure this stays at last always
   ],
   providers: [],
   bootstrap: [AppComponent]

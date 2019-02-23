@@ -1,6 +1,6 @@
 <nav class="navbar has-shadow">
   <div class="navbar-brand">
-    <a class="navbar-item">
+    <a routerLink="/" class="navbar-item">
       Your Logo
     </a>
     <div class="navbar-burger">
@@ -11,15 +11,26 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-end">
-      <a class="navbar-item">
+      <a
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
+        routerLink="/login"
+        class="navbar-item"
+      >
         <div>
-          Sign In
+          Login
         </div>
       </a>
-      <a class="navbar-item">
+
+      <a
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
+        routerLink="/sign-up"
+        class="navbar-item"
+      >
         <div>
           <button class="button is-success">
-            Register
+            Sign Up
           </button>
         </div>
       </a>
@@ -27,6 +38,7 @@
   </div>
 </nav>
 
-<section class="hero">
+<div>
   <router-outlet></router-outlet>
-</section>
+</div>
+
