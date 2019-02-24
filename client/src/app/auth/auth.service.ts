@@ -1,13 +1,13 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 
-interface SignUp {
+export interface SignUp {
   email: string;
   username: string;
   password: string;
 }
 
-interface Login {
+export interface Login {
   email: string;
   password: string;
 }

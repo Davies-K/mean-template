@@ -1,11 +1,11 @@
 import {Component} from "@angular/core";
-import {AuthService} from "../../auth.service";
+import {AuthService, SignUp} from "../../auth.service";
 
 @Component({
   selector: 'app-sign-up-container',
   template: `
     <div>
-      <app-sign-up></app-sign-up>
+      <app-sign-up (signUpCredentials)="onSignUp($event)"></app-sign-up>
     </div>
   `
 })
@@ -14,13 +14,7 @@ export class  SignUpContainerComponent {
 
   }
 
-  async onSignUp() {
-    const signUpData = {
-      email: "",
-      username: "",
-      password: ""
-    };
-
+  async onSignUp(signUpData: SignUp) {
     const performSignUp = await this.authService.signup(signUpData);
 
     console.log(performSignUp);

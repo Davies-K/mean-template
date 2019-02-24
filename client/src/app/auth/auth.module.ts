@@ -7,6 +7,7 @@ import {LoginContainerComponent} from "./containers/login/login-container.compon
 import {HttpClientModule} from "@angular/common/http";
 import {AuthService} from "./auth.service";
 import {AuthGuardService} from "./auth-guard.service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {AuthGuardService} from "./auth-guard.service";
     LoginContainerComponent
   ],
   imports: [
+    FormsModule,
     AuthRoutingModule,
     HttpClientModule
   ],

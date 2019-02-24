@@ -1,4 +1,5 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
+import {SignUp} from "../../auth.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -15,7 +16,7 @@ import {Component} from "@angular/core";
                 <div class="field">
                   <label class="label">Email</label>
                   <div class="control has-icons-left">
-                    <input class="input" type="email" placeholder="foobar@gmail.com" required>
+                    <input [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="input" type="email" placeholder="foobar@gmail.com" required>
                     <span class="icon is-small is-left">
                       <i class="fa fa-envelope"></i>
                     </span>
@@ -24,7 +25,7 @@ import {Component} from "@angular/core";
                 <div class="field">
                   <label class="label">Username</label>
                   <div class="control has-icons-left">
-                    <input class="input" type="text" placeholder="foobar" required>
+                    <input [(ngModel)]="username" [ngModelOptions]="{standalone: true}" class="input" type="text" placeholder="foobar" required>
                     <span class="icon is-small is-left">
                       <i class="fa fa-envelope"></i>
                     </span>
@@ -33,14 +34,14 @@ import {Component} from "@angular/core";
                 <div class="field">
                   <label class="label">Password</label>
                   <div class="control has-icons-left">
-                    <input class="input" type="password" placeholder="*******" required>
+                    <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" class="input" type="password" placeholder="*******" required>
                     <span class="icon is-small is-left">
                       <i class="fa fa-lock"></i>
                     </span>
                   </div>
                 </div>
                 <div class="field">
-                  <button class="button is-success">
+                  <button (click)="signUp()" class="button is-success">
                     Sign Up
                   </button>
                 </div>
@@ -53,4 +54,20 @@ import {Component} from "@angular/core";
   `,
   styles: []
 })
-export class SignUpComponent { }
+export class SignUpComponent {
+  @Output() signUpCredentials = new EventEmitter<SignUp>();
+
+  email: string;
+  username: string;
+  password: string;
+
+  signUp() {
+    const signUpInfo: SignUp = {
+      email: this.email,
+      username: this.username,
+      password: this.password
+    };
+
+    this.signUpCredentials.emit(signUpInfo)
+  }
+}
