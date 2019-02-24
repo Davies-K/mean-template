@@ -29,6 +29,7 @@ app.use(helmet());
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, './build/index.html')));
 
 app.use("/api/users", require("./api/users"));
+app.use("/api/auth", require("./api/authenticate"));
 
 app.use(generalUtils.checkJwt);
 app.use(generalUtils.attachUser);

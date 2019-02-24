@@ -23,10 +23,14 @@ export class AuthService {
   }
 
   login(credentials: Login) {
-
+    return this.http.post('/api/auth', credentials).toPromise();
   }
 
   isAuthenticated(): boolean {
     return this.authenticated;
+  }
+
+  setAuthenticated() {
+    this.authenticated = true;
   }
 }

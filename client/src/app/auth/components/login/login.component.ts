@@ -1,4 +1,5 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
+import {Login} from "../../auth.service";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import {Component} from "@angular/core";
                 <div class="field">
                   <label class="label">Email</label>
                   <div class="control has-icons-left">
-                    <input class="input" type="email" placeholder="foobar@gmail.com" required>
+                    <input [(ngModel)]="email" [ngModelOptions]="{ standalone: true }" class="input" type="email" placeholder="foobar@gmail.com" required>
                     <span class="icon is-small is-left">
                       <i class="fa fa-envelope"></i>
                     </span>
@@ -24,14 +25,14 @@ import {Component} from "@angular/core";
                 <div class="field">
                   <label class="label">Password</label>
                   <div class="control has-icons-left">
-                    <input class="input" type="password" placeholder="*******" required>
+                    <input [(ngModel)]="password" [ngModelOptions]="{ standalone: true }" class="input" type="password" placeholder="*******" required>
                     <span class="icon is-small is-left">
                       <i class="fa fa-lock"></i>
                     </span>
                   </div>
                 </div>
                 <div class="field">
-                  <button class="button is-success">
+                  <button (click)="onLogin()" class="button is-success">
                     Login
                   </button>
                 </div>
@@ -44,4 +45,18 @@ import {Component} from "@angular/core";
   `,
   styles: []
 })
-export class LoginComponent { }
+export class LoginComponent {
+  email: string;
+  password: string;
+
+  @Output() loginCredentials = new EventEmitter<Login>();
+
+  onLogin() {
+    const loginInfo: Login = {
+      email: this.email,
+      password: this.password
+    };
+
+    this.loginCredentials.emit(loginInfo);
+  }
+}

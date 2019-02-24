@@ -5,7 +5,7 @@ const jwtDecode = require("jwt-decode");
 
 const postAuthenticate = async (req, res) => {
     try {
-        const usernameOrEmail = req.body.usernameOrEmail;
+        const usernameOrEmail = req.body.email;
         const password = req.body.password;
 
         const user = await getUser(usernameOrEmail);

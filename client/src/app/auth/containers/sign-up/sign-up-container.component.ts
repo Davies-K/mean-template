@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {AuthService, SignUp} from "../../auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-up-container',
@@ -10,13 +11,17 @@ import {AuthService, SignUp} from "../../auth.service";
   `
 })
 export class  SignUpContainerComponent {
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
 
   }
 
   async onSignUp(signUpData: SignUp) {
-    const performSignUp = await this.authService.signup(signUpData);
+    try {
+      const performSignUp = await this.authService.signup(signUpData);
 
-    console.log(performSignUp);
+      this.router.navigate(['/login']);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
