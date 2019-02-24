@@ -1,5 +1,6 @@
 const jwtDecode = require("jwt-decode");
 const jwt = require("jsonwebtoken");
+const rateLimit = require('express-rate-limit');
 
 const attachUser = (req, res, next) => {
     const token = req.cookies.token;
@@ -32,5 +33,10 @@ const checkJwt = (req, res, next) => {
     }
 };
 
+const limiter = new rateLimit({
+    windowMs: 15 * 60 * 1000, // set window to 15 minutes
+    max: 100,
+    delayMs: 0 // don't require a delay disabled
+});
 
-module.exports = { attachUser, checkJwt };
+module.exports = { attachUser, checkJwt, limiter };
