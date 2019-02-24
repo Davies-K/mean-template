@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {AuthService} from "../../auth.service";
 
 @Component({
   selector: 'app-sign-up-container',
@@ -9,5 +10,19 @@ import {Component} from "@angular/core";
   `
 })
 export class  SignUpContainerComponent {
+  constructor(private authService: AuthService) {
 
+  }
+
+  async onSignUp() {
+    const signUpData = {
+      email: "",
+      username: "",
+      password: ""
+    };
+
+    const performSignUp = await this.authService.signup(signUpData);
+
+    console.log(performSignUp);
+  }
 }

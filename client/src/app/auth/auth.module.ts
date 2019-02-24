@@ -4,6 +4,9 @@ import {SignUpContainerComponent} from "./containers/sign-up/sign-up-container.c
 import {AuthRoutingModule} from "./auth-routing.module";
 import {LoginComponent} from "./components/login/login.component";
 import {LoginContainerComponent} from "./containers/login/login-container.component";
+import {HttpClientModule} from "@angular/common/http";
+import {AuthService} from "./auth.service";
+import {AuthGuardService} from "./auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -13,7 +16,8 @@ import {LoginContainerComponent} from "./containers/login/login-container.compon
     LoginContainerComponent
   ],
   imports: [
-    AuthRoutingModule
+    AuthRoutingModule,
+    HttpClientModule
   ],
   exports: [
     SignUpComponent,
@@ -22,6 +26,6 @@ import {LoginContainerComponent} from "./containers/login/login-container.compon
     LoginContainerComponent,
     AuthRoutingModule
   ],
-  providers: []
+  providers: [AuthService, AuthGuardService]
 })
 export class AuthModule { }
