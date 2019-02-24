@@ -21,12 +21,11 @@ const postAuthenticate = async (req, res) => {
                 role: user.role
             };
 
-            res.cookie('token', token, { maxAge: 360000, httpOnly: true });
+            res.cookie('token', token, { maxAge: 360000, httpOnly: true, sameSite: true });
 
             res.json({ message: 'Authentication successful!', token, userInfo, expiresAt });
         } else {
-            res.status(403).json({ message: 'Wrong username, email, or password.'
-            });
+            res.status(403).json({ message: 'Wrong username, email, or password.'});
         }
     } catch (err) {
         return err;

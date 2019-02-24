@@ -1,4 +1,5 @@
 const jwtDecode = require("jwt-decode");
+const jwt = require("jsonwebtoken");
 
 const attachUser = (req, res, next) => {
     const token = req.cookies.token;
@@ -25,7 +26,6 @@ const checkJwt = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        console.log(decoded);
         next();
     } catch(err) {
         return res.status(403).json({message: 'Access denied'});

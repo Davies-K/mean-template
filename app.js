@@ -3,7 +3,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const rateLimit = require('express-rate-limit');
-const expresJwt = require("express-jwt");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const path = require('path');
@@ -33,6 +32,8 @@ app.use("/api/auth", require("./api/authenticate"));
 
 app.use(generalUtils.checkJwt);
 app.use(generalUtils.attachUser);
+
+// AUTHENTICATED ROUTES
 
 // Everything to start the applications
 async function connect() {
