@@ -6,8 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "prod": "ng build --prod",
-    "postbuild": "mv dist/mean-template/* ../build/",
-    "complete-build": "npm run prod && npm run postbuild",
+    "movefiles": "mv dist/mean-template/* ../build/",
+    "delete-dir": "rm -rf ../build/",
+    "create-dir": "mkdir ../build",
+    "complete-build": "npm run prod && npm run delete-dir && npm run create-dir && npm run movefiles",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
