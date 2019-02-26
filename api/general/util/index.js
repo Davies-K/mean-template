@@ -39,4 +39,8 @@ const limiter = new rateLimit({
     delayMs: 0 // don't require a delay disabled
 });
 
-module.exports = { attachUser, checkJwt, limiter };
+const exceptionErrorHandler = (err, req, res, next) => {
+    res.status(500).send({message: "Exception occured"});
+};
+
+module.exports = { attachUser, checkJwt, limiter, exceptionErrorHandler };

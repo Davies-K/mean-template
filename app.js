@@ -32,6 +32,8 @@ app.use(generalUtils.attachUser);
 // AUTHENTICATED ROUTES
 
 
+// EXCEPTION HANDLER
+app.use(generalUtils.exceptionErrorHandler);
 
 async function connect() {
     try {
