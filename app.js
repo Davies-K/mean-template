@@ -18,9 +18,6 @@ app.use(helmet());
 // SERVE THE APP
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, './build/index.html')));
 
-// OTHERS: NG HANDLED
-app.all('/*', (req, res) => res.sendFile(path.join(__dirname, './build/index.html')));
-
 // APP ROUTES
 app.use("/api/users", require("./api/users"));
 app.use("/api/auth", require("./api/authenticate"));
@@ -31,6 +28,11 @@ app.use(generalUtils.attachUser);
 
 // AUTHENTICATED ROUTES
 
+
+// OTHERS: NG HANDLED
+app.get('/*', (req, res) =>  {
+    res.sendFile(path.join(__dirname, './build/index.html'));
+});
 
 // EXCEPTION HANDLER
 app.use(generalUtils.exceptionErrorHandler);
