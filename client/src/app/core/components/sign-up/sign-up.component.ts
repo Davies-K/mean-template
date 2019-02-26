@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Output} from "@angular/core";
-import {Login} from "../../auth.service";
+import {SignUp} from "../../core.service";
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-sign-up',
   template: `
     <section class="hero is-primary is-fullheight">
       <div class="hero-body">
@@ -16,7 +16,16 @@ import {Login} from "../../auth.service";
                 <div class="field">
                   <label class="label">Email</label>
                   <div class="control has-icons-left">
-                    <input [(ngModel)]="email" [ngModelOptions]="{ standalone: true }" class="input" type="email" placeholder="foobar@gmail.com" required>
+                    <input [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="input" type="email" placeholder="foobar@gmail.com" required>
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-envelope"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Username</label>
+                  <div class="control has-icons-left">
+                    <input [(ngModel)]="username" [ngModelOptions]="{standalone: true}" class="input" type="text" placeholder="foobar" required>
                     <span class="icon is-small is-left">
                       <i class="fa fa-envelope"></i>
                     </span>
@@ -25,15 +34,15 @@ import {Login} from "../../auth.service";
                 <div class="field">
                   <label class="label">Password</label>
                   <div class="control has-icons-left">
-                    <input [(ngModel)]="password" [ngModelOptions]="{ standalone: true }" class="input" type="password" placeholder="*******" required>
+                    <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" class="input" type="password" placeholder="*******" required>
                     <span class="icon is-small is-left">
                       <i class="fa fa-lock"></i>
                     </span>
                   </div>
                 </div>
                 <div class="field">
-                  <button (click)="onLogin()" class="button is-success">
-                    Login
+                  <button (click)="signUp()" class="button is-success">
+                    Sign Up
                   </button>
                 </div>
               </form>
@@ -45,18 +54,20 @@ import {Login} from "../../auth.service";
   `,
   styles: []
 })
-export class LoginComponent {
+export class SignUpComponent {
+  @Output() signUpCredentials = new EventEmitter<SignUp>();
+
   email: string;
+  username: string;
   password: string;
 
-  @Output() loginCredentials = new EventEmitter<Login>();
-
-  onLogin() {
-    const loginInfo: Login = {
+  signUp() {
+    const signUpInfo: SignUp = {
       email: this.email,
+      username: this.username,
       password: this.password
     };
 
-    this.loginCredentials.emit(loginInfo);
+    this.signUpCredentials.emit(signUpInfo)
   }
 }

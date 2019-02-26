@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {AuthService, Login} from "../../auth.service";
+import {CoreService, Login} from "../../core.service";
 
 @Component({
   selector: 'app-login-container',
@@ -10,7 +10,7 @@ import {AuthService, Login} from "../../auth.service";
   `
 })
 export class  LoginContainerComponent {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: CoreService) { }
 
   async onLogin(loginData: Login) {
     try {

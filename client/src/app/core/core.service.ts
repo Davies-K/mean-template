@@ -13,7 +13,7 @@ export interface Login {
 }
 
 @Injectable()
-export class AuthService {
+export class CoreService {
   authenticated: boolean = false;
 
   constructor(private http: HttpClient) { }
@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   login(credentials: Login) {
-    return this.http.post('/api/auth', credentials).toPromise();
+    return this.http.post('/api/core', credentials).toPromise();
   }
 
   isAuthenticated(): boolean {

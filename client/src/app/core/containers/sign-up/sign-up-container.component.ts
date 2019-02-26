@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {AuthService, SignUp} from "../../auth.service";
+import {CoreService, SignUp} from "../../core.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
   `
 })
 export class  SignUpContainerComponent {
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: CoreService, private router: Router) {
 
   }
 

@@ -3,6 +3,10 @@ const jwt = require("jsonwebtoken");
 const rateLimit = require('express-rate-limit');
 
 const attachUser = (req, res, next) => {
+    if(!req.originalUrl.includes("/api/")) {
+        return next()
+    }
+
     const token = req.cookies.token;
 
     if(!token) {
@@ -20,6 +24,10 @@ const attachUser = (req, res, next) => {
 };
 
 const checkJwt = (req, res, next) => {
+    if(!req.originalUrl.includes("/api/")) {
+        return next()
+    }
+
     const token = req.cookies.token;
     if(!token) {
         return res.status(403).json({message: 'Access denied'});
