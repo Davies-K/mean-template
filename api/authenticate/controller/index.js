@@ -3,7 +3,7 @@ const { verifyPassword } = require('./../../users/util');
 const { createToken } = require("../util");
 const jwtDecode = require("jwt-decode");
 
-const postAuthenticate = async (req, res) => {
+const postAuthenticate = async (req, res, next) => {
     try {
         const usernameOrEmail = req.body.email;
         const password = req.body.password;
@@ -28,7 +28,7 @@ const postAuthenticate = async (req, res) => {
             res.status(403).json({ message: 'Wrong username, email, or password.'});
         }
     } catch (err) {
-        return err;
+        next(err);
     }
 };
 

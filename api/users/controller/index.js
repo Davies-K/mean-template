@@ -1,7 +1,7 @@
 const util = require('./../util');
 const queries = require("./../query");
 
-const postUser = async (req, res) => {
+const postUser = async (req, res, next) => {
     try {
         const hashedPassword = await util.hashPassword(req.body.password);
         const userData = {
@@ -13,9 +13,7 @@ const postUser = async (req, res) => {
         const user = await queries.createUser(userData);
         return res.json({message: 'User created!'});
     } catch (err) {
-        return res
-            .status(400)
-            .json({message: 'There was a problem creating your account'});
+        next(err);
     }
 };
 
