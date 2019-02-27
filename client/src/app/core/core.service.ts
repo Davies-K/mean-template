@@ -23,7 +23,7 @@ export class CoreService {
   }
 
   login(credentials: Login) {
-    return this.http.post('/api/core', credentials).toPromise();
+    return this.http.post('/api/auth', credentials).toPromise();
   }
 
   isAuthenticated(): boolean {

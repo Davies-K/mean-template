@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {CoreService, Login} from "../../core.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-container',
@@ -10,12 +11,12 @@ import {CoreService, Login} from "../../core.service";
   `
 })
 export class  LoginContainerComponent {
-  constructor(private authService: CoreService) { }
+  constructor(private authService: CoreService, private router: Router) { }
 
   async onLogin(loginData: Login) {
     try {
       const login = await this.authService.login(loginData);
-      console.log(login);
+      this.router.navigate(['/dashboard']);
     } catch (e) {
       console.log(e);
     }

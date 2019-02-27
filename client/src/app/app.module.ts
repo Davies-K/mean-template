@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import {HomeComponent} from "./home.component";
 import {NotFoundComponent} from "./not-found.component";
 import {CoreModule} from "./core/core.module";
+import {DashboardModule} from "./dashboard/dashboard.module";
 
 library.add(fas);
 @NgModule({
@@ -21,6 +22,7 @@ library.add(fas);
     BrowserModule,
     FontAwesomeModule,
     CoreModule,
+    DashboardModule,
     AppRoutingModule // make sure this stays at last always
   ],
   providers: [],
