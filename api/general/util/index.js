@@ -1,6 +1,7 @@
 const jwtDecode = require("jwt-decode");
 const jwt = require("jsonwebtoken");
 const rateLimit = require('express-rate-limit');
+const redis = require('redis').createClient();
 
 const attachUser = (req, res, next) => {
     if(!req.originalUrl.includes("/api/")) {
@@ -51,4 +52,4 @@ const exceptionErrorHandler = (err, req, res, next) => {
     res.status(500).send({message: "Exception occured"});
 };
 
-module.exports = { attachUser, checkJwt, limiter, exceptionErrorHandler };
+module.exports = { attachUser, checkJwt, limiter, exceptionErrorHandler, redis };

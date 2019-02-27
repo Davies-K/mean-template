@@ -5,10 +5,9 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const path = require('path');
-const redis = require('redis');
-const client = redis.createClient();
-const {promisify} = require('util');
-const getAsync = promisify(client.get).bind(client);
+
+// const {promisify} = require('util');
+// const getAsync = promisify(client.get).bind(client);
 
 const generalUtils = require("./api/general/util");
 const app = express();
@@ -48,7 +47,7 @@ async function connect() {
         console.log("Mongoose connection error ", e);
     }
 
-    client.on('error', (err) => console.log('Something went wrong ' + err));
+    generalUtils.redis.on('error', (err) => console.log('Something went wrong ' + err));
 
     app.listen(3000, () => console.log('Example app listening on port 3000!'));
 };

@@ -2,6 +2,7 @@ const { getUser } = require('./../../users/query');
 const { verifyPassword } = require('./../../users/util');
 const { createToken } = require("../util");
 const jwtDecode = require("jwt-decode");
+const redis = require("../../general/util").redis;
 
 const postAuthenticate = async (req, res, next) => {
     try {
@@ -22,6 +23,7 @@ const postAuthenticate = async (req, res, next) => {
             };
 
             res.cookie('token', token, { maxAge: 360000, httpOnly: true, sameSite: true });
+            redis.set(user.username, token, 'EX', 60* 60);
 
             res.json({ message: 'Authentication successful!', token, userInfo, expiresAt });
         } else {
