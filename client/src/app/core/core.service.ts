@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 
 export interface SignUp {
   email: string;
@@ -14,7 +15,8 @@ export interface Login {
 
 @Injectable()
 export class CoreService {
-  authenticated: boolean = false;
+  private authenticated: boolean = false;
+  private authSubject = new BehaviorSubject<any>(false);
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +25,20 @@ export class CoreService {
   }
 
   login(credentials: Login) {
-    return this.http.post('/api/auth', credentials).toPromise();
+    return this.http.post('/api/login', credentials).toPromise();
+  }
+
+  logout() {
+    this.authenticated = false;
+    return this.http.post('/api/logout', {}).toPromise();
+  }
+
+  sendAuthStatus(message: boolean) {
+    this.authSubject.next({ text: message });
+  }
+
+  getAuthStatus(): Observable<any> {
+    return this.authSubject.asObservable();
   }
 
   isAuthenticated(): boolean {

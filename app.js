@@ -21,14 +21,13 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname, './build/index.html
 // APP ROUTES
 app.use("/api/users", require("./api/users"));
 app.use("/api/login", require("./api/authenticate"));
-app.use("/api/logout", require("./api/logout"));
 
 // AUTHENTICATION CHECK
 app.use(generalUtils.checkJwt);
 app.use(generalUtils.attachUser);
 
 // AUTHENTICATED ROUTES
-
+app.use("/api/logout", require("./api/logout"));
 
 // OTHERS: NG HANDLED
 app.get('/*', (req, res) =>  {
@@ -36,7 +35,7 @@ app.get('/*', (req, res) =>  {
 });
 
 // EXCEPTION HANDLER
-app.use(generalUtils.exceptionErrorHandler);
+//app.use(generalUtils.exceptionErrorHandler);
 
 async function connect() {
     try {

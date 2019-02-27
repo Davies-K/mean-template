@@ -11,11 +11,12 @@ import {Router} from "@angular/router";
   `
 })
 export class  LoginContainerComponent {
-  constructor(private authService: CoreService, private router: Router) { }
+  constructor(private coreService: CoreService, private router: Router) { }
 
   async onLogin(loginData: Login) {
     try {
-      const login = await this.authService.login(loginData);
+      const login = await this.coreService.login(loginData);
+      this.coreService.sendAuthStatus(true);
       this.router.navigate(['/dashboard']);
     } catch (e) {
       console.log(e);
