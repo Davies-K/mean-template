@@ -27,6 +27,7 @@ app.use(generalUtils.checkJwt);
 app.use(generalUtils.attachUser);
 
 // AUTHENTICATED ROUTES
+
 app.use("/api/logout", require("./api/logout"));
 
 // OTHERS: NG HANDLED

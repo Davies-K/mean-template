@@ -16,7 +16,7 @@
         [routerLinkActiveOptions]="{exact: true}"
         routerLink="/login"
         class="navbar-item"
-        *ngIf="!(isLoggedIn$ | async)"
+        *ngIf="!(isLoggedIn$ | async).text"
       >
         <div>
           Login
@@ -28,7 +28,7 @@
         [routerLinkActiveOptions]="{exact: true}"
         routerLink="/sign-up"
         class="navbar-item"
-        *ngIf="!(isLoggedIn$ | async)"
+        *ngIf="!(isLoggedIn$ | async).text"
       >
         <div>
           <button class="button is-success">
@@ -42,7 +42,7 @@
         [routerLinkActiveOptions]="{exact: true}"
         (click)="onLogout()"
         class="navbar-item"
-        *ngIf="(isLoggedIn$ | async)"
+        *ngIf="(isLoggedIn$ | async).text"
       >
         <div>
           <button class="button is-success">

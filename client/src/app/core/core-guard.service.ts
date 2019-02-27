@@ -4,13 +4,15 @@ import {CoreService} from "./core.service";
 
 @Injectable()
 export class CoreGuardService implements CanActivate {
-  constructor(public authService: CoreService, public router: Router) { }
+  constructor(public coreService: CoreService, public router: Router) { }
 
   canActivate(): boolean {
-    if(!this.authService.isAuthenticated()) {
-      this.router.navigate(['login']);
-      return false;
-    }
-    return true;
+     if (this.coreService.checkValid()) {
+        this.coreService.sendAuthStatus(true);
+        return true;
+     } else {
+       this.router.navigate(['/login']);
+       return false;
+     }
   }
 }

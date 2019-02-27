@@ -24,11 +24,14 @@ export class AppComponent implements OnInit {
   }
 
   async onLogout() {
+
     try{
       await this.coreService.logout();
-      this.router.navigate(['/']);
       this.coreService.sendAuthStatus(false);
+      this.router.navigate(['/']);
     } catch(e) {
+      this.coreService.sendAuthStatus(false);
+      this.router.navigate(['/']);
       console.log(e);
     }
   }

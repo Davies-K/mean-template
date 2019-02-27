@@ -30,7 +30,12 @@ export class CoreService {
 
   logout() {
     this.authenticated = false;
+    localStorage.removeItem("state");
     return this.http.post('/api/logout', {}).toPromise();
+  }
+
+  checkValid() {
+    return localStorage.getItem("state") === "true";
   }
 
   sendAuthStatus(message: boolean) {
