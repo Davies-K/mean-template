@@ -31,9 +31,7 @@ app.use(generalUtils.attachUser);
 app.use("/api/logout", require("./api/logout"));
 
 // OTHERS: NG HANDLED
-app.get('/*', (req, res) =>  {
-    res.sendFile(path.join(__dirname, './build/index.html'));
-});
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname, './build/index.html')));
 
 // EXCEPTION HANDLER
 //app.use(generalUtils.exceptionErrorHandler);

@@ -10,6 +10,7 @@ import {HomeComponent} from "./home.component";
 import {NotFoundComponent} from "./not-found.component";
 import {CoreModule} from "./core/core.module";
 import {DashboardModule} from "./dashboard/dashboard.module";
+import {AppGuardService} from "./app-guard.service";
 
 library.add(fas);
 @NgModule({
@@ -25,7 +26,7 @@ library.add(fas);
     DashboardModule,
     AppRoutingModule // make sure this stays at last always
   ],
-  providers: [],
+  providers: [AppGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
