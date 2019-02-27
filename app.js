@@ -5,6 +5,11 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const path = require('path');
+const redis = require('redis');
+const client = redis.createClient();
+const {promisify} = require('util');
+const getAsync = promisify(client.get).bind(client);
+
 const generalUtils = require("./api/general/util");
 const app = express();
 
@@ -34,7 +39,7 @@ app.use("/api/logout", require("./api/logout"));
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname, './build/index.html')));
 
 // EXCEPTION HANDLER
-//app.use(generalUtils.exceptionErrorHandler);
+app.use(generalUtils.exceptionErrorHandler);
 
 async function connect() {
     try {
@@ -42,9 +47,10 @@ async function connect() {
     } catch(e) {
         console.log("Mongoose connection error ", e);
     }
-    app.listen(3000, function () {
-        console.log('Example app listening on port 3000!');
-    });
+
+    client.on('error', (err) => console.log('Something went wrong ' + err));
+
+    app.listen(3000, () => console.log('Example app listening on port 3000!'));
 };
 
 connect();
