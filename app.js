@@ -11,6 +11,8 @@ const path = require('path');
 
 const generalUtils = require("./api/general/util");
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
