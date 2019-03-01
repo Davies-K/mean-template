@@ -19,7 +19,9 @@
         *ngIf="!(isLoggedIn$ | async).text"
       >
         <div>
-          Login
+          <button [ngClass]="{'is-success': isLoginActive}" class="button">
+            Login
+          </button>
         </div>
       </a>
 
@@ -31,7 +33,7 @@
         *ngIf="!(isLoggedIn$ | async).text"
       >
         <div>
-          <button class="button is-success">
+          <button [ngClass]="{'is-success': isSignupActive}" class="button">
             Sign Up
           </button>
         </div>
