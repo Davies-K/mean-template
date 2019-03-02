@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const keys = require('../../../config/keys');
 
 const createToken = user => {
     // Sign the JWT
@@ -9,7 +10,7 @@ const createToken = user => {
             email: user.email,
             role: user.role
         },
-        process.env.JWT_SECRET,
+        keys.JWT_SECRET,
         {
             algorithm: 'HS256',
             expiresIn: '1h'

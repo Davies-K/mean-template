@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon app.js",
-    "prod": "node app.js",
-    "test": "mocha tests/**/*.js"
+    "start": "node app.js",
+    "test": "mocha tests/**/*.js",
+    "build": "npm install --prefix client && npm run complete-build --prefix client"
   },
   "repository": {
     "type": "git",

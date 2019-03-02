@@ -1,7 +1,8 @@
 const jwtDecode = require("jwt-decode");
 const jwt = require("jsonwebtoken");
 const rateLimit = require('express-rate-limit');
-const redis = require('redis').createClient();
+const keys = require('../../../config/keys');
+const redis = require('redis').createClient(keys.redisUrl);
 
 const attachUser = (req, res, next) => {
     if(!req.originalUrl.includes("/api/")) {

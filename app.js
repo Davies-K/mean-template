@@ -13,6 +13,7 @@ const generalUtils = require("./api/general/util");
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const keys = require('./config/keys');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -44,14 +45,15 @@ app.use(generalUtils.exceptionErrorHandler);
 
 async function connect() {
     try {
-        await mongoose.connect("mongodb://localhost/test", {useNewUrlParser: true});
+        await mongoose.connect(keys.mongoURI, {useNewUrlParser: true});
     } catch(e) {
         console.log("Mongoose connection error ", e);
     }
 
     generalUtils.redis.on('error', (err) => console.log('Something went wrong ' + err));
 
-    app.listen(3000, () => console.log('Example app listening on port 3000!'));
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => console.log('Example app listening on port 3000!'));
 };
 
 connect();
