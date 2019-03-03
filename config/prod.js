@@ -1,5 +1,5 @@
 module.exports = {
-    JWT_SECRET: '',
-    mongoURI: '',
-    redisUrl: ''
+    JWT_SECRET: process.env.JWT_SECRET,
+    mongoURI: process.env.mongoURI,
+    redisUrl: process.env.redisUrl
 };

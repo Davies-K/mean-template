@@ -11,7 +11,7 @@ const postUser = async (req, res, next) => {
         };
 
         const user = await queries.createUser(userData);
-        return res.json({message: 'User created!'});
+        return res.json({email: userData.email, username: userData.username});
     } catch (err) {
         next(err);
     }

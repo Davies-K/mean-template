@@ -25,7 +25,7 @@ const postAuthenticate = async (req, res, next) => {
             res.cookie('token', token, { maxAge: 360000, httpOnly: true, sameSite: true });
             redis.set(user.username, token, 'EX', 60* 60);
 
-            res.json({ message: 'Authentication successful!', token, userInfo, expiresAt });
+            res.json({ message: 'Authentication successful!', userInfo, expiresAt });
         } else {
             res.status(403).json({ message: 'Wrong username, email, or password.'});
         }
