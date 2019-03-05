@@ -31,12 +31,13 @@ const checkJwt = (req, res, next) => {
     }
 
     const token = req.cookies.token;
+
     if(!token) {
         return res.status(403).json({message: 'Access denied'});
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, keys.JWT_SECRET);
         next();
     } catch(err) {
         return res.status(403).json({message: 'Access denied'});

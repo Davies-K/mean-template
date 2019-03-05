@@ -6,11 +6,18 @@ const chaiHttp = require('chai-http');
 const server = require('../app');
 const mongoose = require("mongoose");
 const User = require("../api/users/model");
+const expect = chai.expect;
 
-var Cookies;
+// Redis related imports
+const redis = require('redis');
+const client = redis.createClient();
+const {promisify} = require('util');
+const getAsync = promisify(client.get).bind(client);
+
 chai.use(chaiHttp);
 
-describe('Users', function() {
+
+describe('Auth flow', function() {
     User.collection.drop();
 
     it('should create a new user POST', function (done) {
@@ -27,19 +34,21 @@ describe('Users', function() {
            });
     });
 
-    it('should authenticate the user POST', function (done) {
-       chai.request(server)
+    it('should authenticate and logout the user POST', function (done) {
+        const agent = chai.request.agent(server);
+
+        agent
            .post('/api/login')
            .send({'email': 'test@test.com', 'password': 'testpassword'})
-           .end(function (err, res) {
-               res.should.have.status(200);
-               res.should.be.json;
-               res.body.should.be.a('object');
-               res.body.should.have.property('message');
-               res.body.should.have.property('userInfo');
-               res.body.should.have.property('expiresAt');
-               Cookies = res.headers['set-cookie'].pop().split(';')[0];
-               done();
+           .then(function (res) {
+               expect(res).to.have.cookie('token');
+
+               return agent.post('/api/logout')
+                   .then(function (res) {
+                       expect(res).to.have.status(200);
+                       done();
+                   });
            });
     });
+
 });
