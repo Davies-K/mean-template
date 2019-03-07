@@ -17,6 +17,15 @@ const postUser = async (req, res, next) => {
     }
 };
 
+const googleOAuth = async (req, res, next) => {
+    try {
+
+    } catch(e) {
+        next(e);
+    }
+};
+
 module.exports = {
-    postUser
+    postUser,
+    googleOAuth
 };

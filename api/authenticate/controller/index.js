@@ -29,11 +29,10 @@ const postAuthenticate = async (req, res, next) => {
             res.cookie('token', token, { maxAge: 360000, httpOnly: true, sameSite: true });
 
             if(redisKey) {
-
-            } else {
-                redisClient.set(user.username, token, 'EX', 60* 60);
+                redisClient.del(user.username);
             }
 
+            redisClient.set(user.username, token, 'EX', 60* 60);
 
             res.json({ message: 'Authentication successful!', userInfo, expiresAt });
         } else {
